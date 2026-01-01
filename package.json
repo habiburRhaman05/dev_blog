@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "type": "module",
-"scripts": {
-  "dev": "tsx watch src/server.ts",
-  "build": "prisma generate && tsc",
-  "start": "npx tsx watch src/server.ts",
-  "postinstall": "prisma generate"
-},
+  "scripts": {
+    "dev": "nodemon",
+    "build": "prisma generate && tsc",
+    "start": "npx tsx watch src/server.ts",
+    "postinstall": "prisma generate"
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -40,7 +40,9 @@
     "hpp": "^0.2.3",
     "morgan": "^1.10.1",
     "nodemailer": "^7.0.12",
+    "nodemon": "^3.1.11",
     "pg": "^8.16.3",
+    "pnpm": "^10.27.0",
     "zod": "^3.25.56"
   }
 }

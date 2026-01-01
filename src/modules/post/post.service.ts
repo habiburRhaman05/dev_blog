@@ -89,6 +89,22 @@ const fetchPostDeatils = async (id: number) => {
     where: {
       id: id,
     },
+   include: {
+      author: true, // Optional: includes user who wrote the post
+      comment: {
+        where: {
+          parentId: null, // Only get top-level comments first
+        },
+        include: {
+          author: true, // Who wrote the comment
+          replies: {
+            include: {
+              author: true, // Who replied
+            },
+          },
+        },
+      },
+    },
   })
   return data
 };

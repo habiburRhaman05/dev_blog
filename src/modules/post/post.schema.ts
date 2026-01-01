@@ -12,5 +12,7 @@ export const createPostSchema = z.object({
   authorId: z.string(),
 });
 
+
+
 // inferred type for service layer
 export type CreatePostInput = z.infer<typeof createPostSchema>;

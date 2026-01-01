@@ -10,7 +10,7 @@ const router = express.Router();
 
 
 router.get("/all",asyncHandler(postControllers.getAllPosts));
-router.get("/all/:postId",asyncHandler(postControllers.getPostDetails));
+router.get("/all/:postId", asyncHandler(postControllers.getPostDetails));
 router.put("/all/:postId/update",isAuthenticate("USER","ADMIN"),asyncHandler(postControllers.updatePost));
 router.delete("/all/:postId",isAuthenticate("USER","ADMIN"),asyncHandler(postControllers.deletePost));
 router.post("/create-new",isAuthenticate("USER","ADMIN"), validate(createPostSchema),asyncHandler(postControllers.createPost));

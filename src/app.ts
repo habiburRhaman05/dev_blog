@@ -10,6 +10,7 @@ import { auth } from './lib/auth';
 import userRouter from './modules/user/user.router';
 import { corsConfig } from './config/cors';
 import cors from "cors"
+import commentRouter from './modules/comment/comment.router';
 
 const app: Express = express();
 app.use(cors(corsConfig))
@@ -17,6 +18,7 @@ app.all('/api/auth/*splat', toNodeHandler(auth));
 app.use(express.json({ limit: '1mb' }));
 app.use("/api/v1/post",postRouter)
 app.use("/api/v1/user",userRouter)
+app.use("/api/v1/comment",commentRouter)
 app.set("trust proxy", 1);
 export const startServer = async () => {
   try {

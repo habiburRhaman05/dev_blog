@@ -76,8 +76,8 @@ model Comment {
   postId    Int
   parentId  Int?
   status    CommentStatus
-  createdAt DateTime
-  updatedAt DateTime
+createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
   post      Post          @relation(fields: [postId], references: [id])
   author    User          @relation(fields: [authorId], references: [id])
   parent    Comment?      @relation("CommentReplies", fields: [parentId], references: [id])
