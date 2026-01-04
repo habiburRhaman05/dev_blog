@@ -5,13 +5,13 @@ import { sendError, sendSuccess } from "../../utils/apiResponse";
 import postServices from "./post.service";
 
 const getAllPosts: Controller = async (req: Request, res: Response) => {
-  const { search, tags, isFeatured, status, email } = req.query;
+  const { search, tags, isFeatured, status } = req.query;
   const { page } = req.params;
   
 
   const finalQuery = {
     search: search as string | undefined,
-    user: email as string | undefined,
+  
   page:parseInt(page || "1"),
     tags: typeof tags === "string" ? tags.split(",") : undefined,
 
@@ -22,10 +22,11 @@ const getAllPosts: Controller = async (req: Request, res: Response) => {
   };
 
   const allPosts = await postServices.fetchAllPosts(finalQuery);
+  
 
   return sendSuccess(res, {
-    message: "Fetched all posts successfully",
-    data: allPosts,
+    message: allPosts.length > 0 ? "Fetched all posts successfully" : "No posts found",
+    data: allPosts || [],
   });
 };
 

@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon",
+    "dev": "npx tsx watch src/server.ts",
     "build": "prisma generate && tsc",
     "start": "npx tsx watch src/server.ts",
     "postinstall": "prisma generate"

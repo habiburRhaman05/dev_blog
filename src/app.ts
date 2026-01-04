@@ -11,6 +11,7 @@ import userRouter from './modules/user/user.router';
 import { corsConfig } from './config/cors';
 import cors from "cors"
 import commentRouter from './modules/comment/comment.router';
+import postControllers from './modules/post/post.controller';
 
 const app: Express = express();
 app.use(cors(corsConfig))
@@ -21,10 +22,12 @@ app.use("/api/v1/user",userRouter)
 app.use("/api/v1/comment",commentRouter)
 app.set("trust proxy", 1);
 app.get("/welcome-page",(req,res)=>{
-  res.send("welcome to our app")
+  res.send("welcome to our my app")
 })
+// app.get("/welcome-page",postControllers.getAllPosts)
 export const startServer = async () => {
-  try {
+
+try {
 
     applyMiddleware(app);
 

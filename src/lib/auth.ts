@@ -14,7 +14,8 @@ export const auth = betterAuth({
     }),
     trustedOrigins:[
         "http://localhost:3000",
-        "https://postella-beta.vercel.app"
+        "https://postella-beta.vercel.app",
+        "https://nuance-daily.vercel.app"
     ],
     plugins: [bearer(),
     // emailOTP({
@@ -96,6 +97,7 @@ export const auth = betterAuth({
         clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
         accessType: "offline", 
         prompt: "select_account consent", 
+        
     },
     }
 });
