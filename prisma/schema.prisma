@@ -41,7 +41,7 @@ model User {
   accounts      Account[]
   posts         Post[]
   comments      Comment[]
-
+  savedPosts SavedPost[]
   role   String  @default("USER")
   status String? @default("ACTIVE")
   phone  String?
@@ -64,9 +64,19 @@ model Post {
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
   comment    Comment[]
-
+savedBy    SavedPost[] // Relation to SavedPost
   @@index([authorId])
   @@map("posts")
+}
+model SavedPost {
+  id     Int @id @default(autoincrement())
+  postId Int
+  userId String
+  // Define the relations
+  post   Post   @relation(fields: [postId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@unique([userId, postId]) // Recommended: prevents saving same post twice
 }
 
 model Comment {
@@ -78,8 +88,8 @@ model Comment {
   status    CommentStatus
 createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  post      Post          @relation(fields: [postId], references: [id])
-  author    User          @relation(fields: [authorId], references: [id])
+  post      Post          @relation(fields: [postId], references: [id],onDelete: Cascade)
+  author    User          @relation(fields: [authorId], references: [id],onDelete: Cascade)
   parent    Comment?      @relation("CommentReplies", fields: [parentId], references: [id])
   replies   Comment[]     @relation("CommentReplies")
 

@@ -99,7 +99,7 @@ const fetchPostDeatils = async (id: number) => {
   })
   return data
 };
-const fetchPostByUserId = async (id: string) => {
+const fetchPostsListByUserId = async (id: string) => {
   const data = await prisma.post.findMany({
     where: {
      authorId:id
@@ -112,11 +112,32 @@ const fetchPostByUserId = async (id: string) => {
 };
 
 
-const getSavedPostsByUserId = async ()=>{
-  return [
+const getSavedPostsByUserId = async (userId:string)=>{
+const savedPosts = await prisma.savedPost.findMany({
+    where: {
+      userId: userId,
+    },
+    include: {
+      post: {
+        include: {
+          author: {
+            select: {
+              name: true,
+              image: true,
+            },
+          },
+        },
+      },
+    },
+    orderBy: {
+      id: 'desc', // Show newest saves first
+    },
+  });
 
-  ]
+  return savedPosts;
 }
+
+
 
 
 const deletePostById = async (id: number) => {
@@ -133,14 +154,50 @@ const updatePost = async (id: number,updatedData: Partial<Post>) => {
   })
 };
 
+
+
+
+const createSavedPost = async (data:{
+  postId:number;
+  userId:string;
+})=>{
+const newSavedPosts = await prisma.savedPost.create({
+  data
+  });
+
+  return newSavedPosts;
+}
+const deleteSavedPost = async (data:{
+  postId:number;
+  userId:string;
+})=>{
+const newSavedPosts = await prisma.savedPost.delete({
+   where:{
+   userId_postId:{
+    postId:data.postId,
+    userId:data.userId
+   }
+   }
+  });
+
+  if(newSavedPosts.id){
+
+    return true;
+  }
+  return false
+}
+
+
 const postServices = {
   fetchAllPosts,
   createPostService,
   fetchPostDeatils,
   deletePostById,
   updatePost,
-  fetchPostByUserId,
-  getSavedPostsByUserId
+  fetchPostsListByUserId,
+  getSavedPostsByUserId,
+  createSavedPost,
+  deleteSavedPost
 };
 
 export default postServices;

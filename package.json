@@ -22,6 +22,8 @@
     "@types/node": "^25.0.3",
     "@types/nodemailer": "^7.0.4",
     "@types/pg": "^8.16.0",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
     "express": "^5.2.1",
     "prisma": "^7.2.0",
     "tsx": "^4.21.0",
@@ -30,6 +32,7 @@
   "dependencies": {
     "@prisma/adapter-pg": "^7.2.0",
     "@prisma/client": "^7.2.0",
+    "@scalar/express-api-reference": "^0.8.30",
     "better-auth": "^1.4.9",
     "compression": "^1.8.1",
     "cookie-parser": "^1.4.7",
@@ -43,6 +46,8 @@
     "nodemon": "^3.1.11",
     "pg": "^8.16.3",
     "pnpm": "^10.27.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "zod": "^3.25.56"
   }
 }

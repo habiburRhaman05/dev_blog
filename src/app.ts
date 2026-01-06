@@ -12,7 +12,9 @@ import { corsConfig } from './config/cors';
 import cors from "cors"
 import commentRouter from './modules/comment/comment.router';
 import postControllers from './modules/post/post.controller';
-
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerOptions from './docs/swaggerApi';
+import swaggerUi from "swagger-ui-express";
 const app: Express = express();
 app.use(cors(corsConfig))
 app.all('/api/auth/*splat', toNodeHandler(auth));
@@ -21,6 +23,12 @@ app.use("/api/v1/post",postRouter)
 app.use("/api/v1/user",userRouter)
 app.use("/api/v1/comment",commentRouter)
 app.set("trust proxy", 1);
+
+
+const swaggerSpec = swaggerJSDoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+
 app.get("/welcome-page",(req,res)=>{
   res.send("welcome to our my app")
 })
