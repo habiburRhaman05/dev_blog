@@ -106,19 +106,12 @@ const updatePost: Controller = async (req, res) => {
 };
 
 const getSavedPostsList: Controller = async (req, res) => {
-  const { userId } = req.params;
+  
 
-  if (!userId) {
-    return sendError(res, {
-      message: "userId not Found IN URL",
-    });
-  }
 
-  if (req.user?.id !== userId) {
-    return sendError(res, {
-      message: "you don't have access to get other user saved posts",
-    });
-  }
+  const userId = req.user?.id
+
+
 
   const postsList = await postServices.getSavedPostsByUserId(userId!);
 
@@ -130,24 +123,10 @@ const getSavedPostsList: Controller = async (req, res) => {
   return sendSuccess(res, { message, data: postsList });
 };
 const createNewSavedPost: Controller = async (req, res) => {
-  const { userId, postId } = req.body;
+  const {  postId } = req.body;
 
-  if (!userId) {
-    return sendError(res, {
-      message: "userId not Found in Body data",
-    });
-  }
-  if (!postId) {
-    return sendError(res, {
-      message: "postId not Found in Body data",
-    });
-  }
-
-  if (req.user?.id !== userId) {
-    return sendError(res, {
-      message: "you don't have access!",
-    });
-  }
+ 
+ const userId = req.user?.id!
 
   const post = await postServices.fetchPostDeatils(postId)
 
