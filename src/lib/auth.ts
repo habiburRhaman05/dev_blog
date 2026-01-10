@@ -15,7 +15,8 @@ export const auth = betterAuth({
     trustedOrigins:[
         "http://localhost:3000",
         "https://postella-beta.vercel.app",
-        "https://nuance-daily.vercel.app"
+        "https://nuance-daily.vercel.app",
+        "https://neonotesbackend-production.up.railway.app"
     ],
     plugins: [bearer(),
     // emailOTP({
