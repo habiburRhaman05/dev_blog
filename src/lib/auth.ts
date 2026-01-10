@@ -102,6 +102,11 @@ export const auth = betterAuth({
     },
     },
      advanced: {
+           cookies: {
+            session_token: {
+                name: "my-app", // Completely custom name
+            },
+        },
     defaultCookieAttributes: {
       sameSite: "none", // Must be "none" for cross-site usage
       secure: true, // Must be true when SameSite is "none"
