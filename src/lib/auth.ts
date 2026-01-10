@@ -16,7 +16,7 @@ export const auth = betterAuth({
         "http://localhost:3000",
         "https://postella-beta.vercel.app",
         "https://nuance-daily.vercel.app",
-        "https://neonotesbackend-production.up.railway.app"
+        
     ],
     plugins: [bearer(),
     // emailOTP({
@@ -102,14 +102,18 @@ export const auth = betterAuth({
     },
     },
      advanced: {
-           cookies: {
+          cookies: {
+            
             session_token: {
-                name: "my-app", // Completely custom name
+                
+                name: "custom_session_id", // Completely custom name
             },
         },
     defaultCookieAttributes: {
+      
       sameSite: "none", // Must be "none" for cross-site usage
       secure: true, // Must be true when SameSite is "none"
       httpOnly: true, // Good practice for security
-    },}
+    }
+}
 });
